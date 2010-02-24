@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 
 import util.SocketManager;
@@ -9,7 +10,7 @@ public class CarServer {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		{
 			// Set the port number.
 			int port;
@@ -32,20 +33,23 @@ public class CarServer {
 
 			ServerSocket wellcomeSocket = new ServerSocket(port);
 
+
 			while (true)
 			{
+					
+					System.out.println("Esperando peticiones en el puerto " + port + ".");
 				//Aceptar la nueva petición y crear el SocketManager para gestionar el Socket obtenido
-				SocketManager sm = new SocketManager(wellcomeSocket.accept());
-				System.out.println("Esperando peticiones en el puerto " + port + ".");
+					SocketManager sm = new SocketManager(wellcomeSocket.accept());
 
-		
-				//Crear un objeto HttpRequest para gestionar la petici�n
-				ClientRequest request = new ClientRequest(sm);
-				//Crear un Thread para el objeto ClientRequest
-				Thread hilo = new Thread(request);
+	
 			
-				//Arrancar el Thread
-				hilo.run();
+					//Crear un objeto HttpRequest para gestionar la petici�n
+					ClientRequest request = new ClientRequest(sm);
+					//Crear un Thread para el objeto ClientRequest
+					Thread hilo = new Thread(request);
+				
+					//Arrancar el Thread
+					hilo.run();
 			}
 		}
 
