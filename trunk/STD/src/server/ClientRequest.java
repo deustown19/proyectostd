@@ -41,7 +41,7 @@ public class ClientRequest implements Runnable {
 						try{
 							usuario = comando[1];
 							sockManager.Escribir("201 OK Bienvenido " + usuario + CRLF);
-							estado = 2;
+							estado = 1;
 						}
 						catch(ArrayIndexOutOfBoundsException e)
 						{// No ha introducido el nombre de usuario.
@@ -60,7 +60,7 @@ public class ClientRequest implements Runnable {
 						try{
 							if (usuario.equals("user") && comando[1].equals("pass")){
 								sockManager.Escribir("202 OK Bienvenido al sistema" + CRLF);
-								estado = 3;			
+								estado = 2;			
 							}
 							else sockManager.Escribir("402 ERR La clave es incorrecta" + CRLF);
 						}
@@ -75,12 +75,15 @@ public class ClientRequest implements Runnable {
 					else {
 						sockManager.Escribir("450 ERR Comando no válido" + CRLF);
 					}
-					break;	
+					break;
+				default:
+					estado = 4;
 				}
-				sockManager.Escribir("208 OK Salir" + CRLF);
-				sockManager.CerrarSocket();
-				sockManager.CerrarStreams();
 			}
+			sockManager.Escribir("208 OK Salir" + CRLF);
+			System.out.println("Cliente fuera");
+			sockManager.CerrarSocket();
+			sockManager.CerrarStreams();
 		}
 		catch (IOException e){
 		      System.err.println(e);
