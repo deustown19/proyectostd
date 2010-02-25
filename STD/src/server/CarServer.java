@@ -14,7 +14,7 @@ public class CarServer {
 		{
 			// Set the port number.
 			int port;
-			if (args.length>0){
+			if (args.length>0){//Comprobación de que el puerto es un número válido. 3000 por defecto.
 				try{
 					port = Integer.parseInt(args[0]);
 					if (port<1024 || port> 49152){
@@ -34,22 +34,18 @@ public class CarServer {
 			ServerSocket wellcomeSocket = new ServerSocket(port);
 
 
-			while (true)
-			{
-					
+			while (true){					
 					System.out.println("Esperando peticiones en el puerto " + port + ".");
-				//Aceptar la nueva petición y crear el SocketManager para gestionar el Socket obtenido
-					SocketManager sm = new SocketManager(wellcomeSocket.accept());
-
-	
+					//Aceptamos la nueva petición y creamos el SocketManager para gestionar el Socket obtenido
+					SocketManager sm = new SocketManager(wellcomeSocket.accept());	
 			
-					//Crear un objeto HttpRequest para gestionar la petici�n
+					//Creamos un objeto ClientRequest para gestionar las peticiones del cliente
 					ClientRequest request = new ClientRequest(sm);
-					//Crear un Thread para el objeto ClientRequest
+					//Creamos un Thread para el objeto ClientRequest
 					Thread hilo = new Thread(request);
 				
 					//Arrancar el Thread
-					hilo.run();
+					hilo.start();
 			}
 		}
 
