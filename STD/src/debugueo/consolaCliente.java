@@ -52,6 +52,4 @@ public final class consolaCliente {
 			System.out.println(e);
 		}
 	}
-
-	String ip
 }
