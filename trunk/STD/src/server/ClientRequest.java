@@ -65,7 +65,7 @@ public class ClientRequest implements Runnable {
 							}
 							else{
 								sockManager.Escribir("402 ERR La clave es incorrecta. Introduzca usuario" + CRLF);
-								estado = 1;
+								estado = 0;
 							}
 							
 						}
