@@ -1,15 +1,11 @@
 package server;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 
 import util.SocketManager;
 
-public class CarServer {
-
-	/**
-	 * @param args
-	 */
+public class CarServer
+{
 	public static void main(String[] args) throws Exception{
 		{
 			// Set the port number.
