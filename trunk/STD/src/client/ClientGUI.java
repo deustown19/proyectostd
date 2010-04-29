@@ -1,6 +1,5 @@
 package client;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,34 +14,23 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-/**
-* This code was edited or generated using CloudGarden's Jigloo
-* SWT/Swing GUI Builder, which is free for non-commercial
-* use. If Jigloo is being used commercially (ie, by a corporation,
-* company or business for any purpose whatever) then you
-* should purchase a license for each developer using Jigloo.
-* Please visit www.cloudgarden.com for details.
-* Use of Jigloo implies acceptance of these licensing terms.
-* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
-* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
-* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
-*/
 public class ClientGUI extends javax.swing.JFrame
 {
 	private static final long serialVersionUID = -8877474517268367965L;
+	
 	private JPanel authPanel;
 	private JLabel userLabel;
 	private JTextField userField;
 	private JLabel jLabel2;
 	private JPanel jPanel5;
-	private JPanel jPanel3;
-	private JButton jButton1;
-	private JPanel jPanel2;
-	private JButton jButton2;
-	private JPanel elResto;
-	private JPanel jPanel1;
-	private JPanel jPanel4;
-	private JLabel jLabel1;
+	private JPanel sensorPanel;
+	private JButton loginButton;
+	private JPanel contentPanel;
+	private JButton exitButton;
+	private JPanel bottomPanel;
+	private JPanel loginPanel;
+	private JPanel serverPanel;
+	private JLabel ipLabel;
 	private JLabel passLabel;
 	private JPasswordField passField;
 
@@ -63,21 +51,21 @@ public class ClientGUI extends javax.swing.JFrame
 			getContentPane().setLayout(null);
 			this.setResizable(false);
 			{
-				jPanel2 = new JPanel();
-				getContentPane().add(jPanel2, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-				BoxLayout jPanel2Layout = new BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS);
-				jPanel2.setLayout(jPanel2Layout);
-				jPanel2.setBounds(5, 5, 625, 450);
+				contentPanel = new JPanel();
+				getContentPane().add(contentPanel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+				BoxLayout contentPanelLayout = new BoxLayout(contentPanel, javax.swing.BoxLayout.Y_AXIS);
+				contentPanel.setLayout(contentPanelLayout);
+				contentPanel.setBounds(5, 5, 625, 450);
 				{
-					jPanel1 = new JPanel();
-					jPanel2.add(jPanel1);
-					BoxLayout jPanel1Layout = new BoxLayout(jPanel1, javax.swing.BoxLayout.X_AXIS);
-					jPanel1.setLayout(jPanel1Layout);
+					loginPanel = new JPanel();
+					contentPanel.add(loginPanel);
+					BoxLayout loginPanelLayout = new BoxLayout(loginPanel, javax.swing.BoxLayout.X_AXIS);
+					loginPanel.setLayout(loginPanelLayout);
 					{
 						authPanel = new JPanel();
-						jPanel1.add(authPanel);
-						GridBagLayout jPanel1Layouto = new GridBagLayout();
-						authPanel.setLayout(jPanel1Layouto);
+						loginPanel.add(authPanel);
+						GridBagLayout authPanelLayout = new GridBagLayout();
+						authPanel.setLayout(authPanelLayout);
 						authPanel.setBorder(BorderFactory.createTitledBorder("Autenticación"));
 						{
 							userLabel = new JLabel("Usuario");
@@ -98,33 +86,31 @@ public class ClientGUI extends javax.swing.JFrame
 							passField.setPreferredSize(new Dimension(100, 20));
 						}
 						{
-							jButton1 = new JButton("Login");
-							authPanel.add(jButton1, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
+							loginButton = new JButton("Login");
+							authPanel.add(loginButton, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 						}
 					}
 					{
-						jPanel4 = new JPanel();
-						jPanel1.add(jPanel4);
-						GridBagLayout jPanel4Layout = new GridBagLayout();
-						jPanel4.setLayout(jPanel4Layout);
-						jPanel4.setBorder(BorderFactory.createTitledBorder("Servidor"));
+						serverPanel = new JPanel();
+						loginPanel.add(serverPanel);
+						GridBagLayout serverPanelLayout = new GridBagLayout();
+						serverPanel.setLayout(serverPanelLayout);
+						serverPanel.setBorder(BorderFactory.createTitledBorder("Servidor"));
 						{
-							jLabel1 = new JLabel("IP: -");
-							jPanel4.add(jLabel1, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
-							BorderLayout jLabel1Layout = new BorderLayout();
-							jLabel1.setLayout(jLabel1Layout);
+							ipLabel = new JLabel("IP: -");
+							serverPanel.add(ipLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 						}
 					}
 				}
 				{
-					jPanel3 = new JPanel();
-					BoxLayout jPanel3Layout = new BoxLayout(jPanel3, javax.swing.BoxLayout.X_AXIS);
-					jPanel3.setLayout(jPanel3Layout);
-					jPanel2.add(jPanel3);
+					sensorPanel = new JPanel();
+					BoxLayout sensorPanelLayout = new BoxLayout(sensorPanel, javax.swing.BoxLayout.X_AXIS);
+					sensorPanel.setLayout(sensorPanelLayout);
+					contentPanel.add(sensorPanel);
 					{
 						jPanel5 = new JPanel();
 						GridBagLayout jPanel5Layout = new GridBagLayout();
-						jPanel3.add(jPanel5);
+						sensorPanel.add(jPanel5);
 						jPanel5.setBorder(BorderFactory.createTitledBorder("Sensor"));
 						jPanel5.setLayout(jPanel5Layout);
 						{
@@ -135,12 +121,12 @@ public class ClientGUI extends javax.swing.JFrame
 					}
 				}
 				{
-					elResto = new JPanel();
-					jPanel2.add(elResto);
+					bottomPanel = new JPanel();
+					contentPanel.add(bottomPanel);
 					{
-						jButton2 = new JButton();
-						elResto.add(jButton2);
-						jButton2.setText("Salir");
+						exitButton = new JButton();
+						bottomPanel.add(exitButton);
+						exitButton.setText("Salir");
 					}
 				}
 			}
