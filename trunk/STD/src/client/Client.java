@@ -9,7 +9,7 @@ public abstract class Client
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			new ClientGUI().setVisible(true);
+			new ClientGUI("127.0.0.1", "8080").setVisible(true);
 		}
 		catch (Exception e)
 		{
