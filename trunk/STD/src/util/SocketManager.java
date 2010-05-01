@@ -35,7 +35,7 @@ public class SocketManager
 	public SocketManager(Socket sock) throws IOException
 	{
 		this.mySocket = sock;
-		InicializaStreams();
+		inicializaStreams();
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class SocketManager
 	public SocketManager(InetAddress address, int port) throws IOException
 	{
 		mySocket = new Socket(address, port);
-		InicializaStreams();
+		inicializaStreams();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class SocketManager
 	public SocketManager(String host, int port) throws IOException
 	{
 		mySocket = new Socket(host, port);
-		InicializaStreams();
+		inicializaStreams();
 	}
 
 	/**
@@ -69,19 +69,19 @@ public class SocketManager
 	 * 
 	 * @throws IOException
 	 */
-	public void InicializaStreams() throws IOException
+	public void inicializaStreams() throws IOException
 	{
 		bufferEscritura = new DataOutputStream(mySocket.getOutputStream());
 		bufferLectura = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 	}
 
-	public void CerrarStreams() throws IOException
+	public void cerrarStreams() throws IOException
 	{
 		bufferEscritura.close();
 		bufferLectura.close();
 	}
 
-	public void CerrarSocket() throws IOException
+	public void cerrarSocket() throws IOException
 	{
 		mySocket.close();
 	}
@@ -90,17 +90,17 @@ public class SocketManager
 	 * @return String
 	 * @throws IOException
 	 */
-	public String Leer() throws IOException
+	public String leer() throws IOException
 	{
 		return (bufferLectura.readLine());
 	}
 
-	public void Escribir(String contenido) throws IOException
+	public void escribir(String contenido) throws IOException
 	{
 		bufferEscritura.writeBytes(contenido);
 	}
 
-	public void Escribir(byte[] buffer, int bytes) throws IOException
+	public void escribir(byte[] buffer, int bytes) throws IOException
 	{
 		bufferEscritura.write(buffer, 0, bytes);
 	}

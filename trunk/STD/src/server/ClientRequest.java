@@ -30,7 +30,7 @@ public class ClientRequest implements Runnable
 			int estado = 0;
 			while (estado < 4)
 			{
-				comando = commandParser(sockManager.Leer());
+				comando = commandParser(sockManager.leer());
 
 				switch (estado)
 				{
@@ -40,12 +40,12 @@ public class ClientRequest implements Runnable
 							try
 							{
 								usuario = comando[1];
-								sockManager.Escribir("201 OK Bienvenido " + usuario + CRLF);
+								sockManager.escribir("201 OK Bienvenido " + usuario + CRLF);
 								estado = 1;
 							}
 							catch (ArrayIndexOutOfBoundsException e)
 							{// No ha introducido el nombre de usuario.
-								sockManager.Escribir("401 ERR Falta el nombre de usuario" + CRLF);
+								sockManager.escribir("401 ERR Falta el nombre de usuario" + CRLF);
 							}
 						}
 						else if (comando[0].toUpperCase().equals("SALIR"))
@@ -54,7 +54,7 @@ public class ClientRequest implements Runnable
 						}
 						else
 						{
-							sockManager.Escribir("450 ERR Comando no válido" + CRLF);
+							sockManager.escribir("450 ERR Comando no válido" + CRLF);
 						}
 						break;
 
@@ -65,19 +65,19 @@ public class ClientRequest implements Runnable
 							{
 								if (usuario.equals("user") && comando[1].equals("pass"))
 								{
-									sockManager.Escribir("202 OK Bienvenido al sistema" + CRLF);
+									sockManager.escribir("202 OK Bienvenido al sistema" + CRLF);
 									estado = 2;
 								}
 								else
 								{
-									sockManager.Escribir("402 ERR La clave es incorrecta. Introduzca usuario" + CRLF);
+									sockManager.escribir("402 ERR La clave es incorrecta. Introduzca usuario" + CRLF);
 									estado = 0;
 								}
 
 							}
 							catch (ArrayIndexOutOfBoundsException e)
 							{// No ha introducido la clave
-								sockManager.Escribir("403 ERR Falta la clave" + CRLF);
+								sockManager.escribir("403 ERR Falta la clave" + CRLF);
 							}
 						}
 						else if (comando[0].toUpperCase().equals("SALIR"))
@@ -86,7 +86,7 @@ public class ClientRequest implements Runnable
 						}
 						else
 						{
-							sockManager.Escribir("450 ERR Comando no válido" + CRLF);
+							sockManager.escribir("450 ERR Comando no válido" + CRLF);
 						}
 						break;
 
@@ -98,10 +98,10 @@ public class ClientRequest implements Runnable
 						estado = 4;
 				}
 			}
-			sockManager.Escribir("208 OK Salir" + CRLF);
+			sockManager.escribir("208 OK Salir" + CRLF);
 			System.out.println("Cliente fuera");
-			sockManager.CerrarSocket();
-			sockManager.CerrarStreams();
+			sockManager.cerrarSocket();
+			sockManager.cerrarStreams();
 		}
 		catch (IOException e)
 		{

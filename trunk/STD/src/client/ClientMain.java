@@ -2,7 +2,7 @@ package client;
 
 import javax.swing.UIManager;
 
-public abstract class Client
+public abstract class ClientMain
 {
 	public static void main(String[] args)
 	{
