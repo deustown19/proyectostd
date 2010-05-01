@@ -32,8 +32,7 @@
     </target>
 
 	<target name="client" description="Runs Server program">
-		<java classname="client.ClientMain" classpath="${classpath}" fork="true">
-			
+		<java classname="client.Client" classpath="${classpath}" fork="true">
         	<arg value="${server.IP}"/> 
 	 		<arg value="${server.port}"/> 
 			<arg value="${server.name}"/> 
