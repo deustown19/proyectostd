@@ -32,14 +32,14 @@ public class CarServer
 				port = 3000;
 			}
 
-			ServerSocket wellcomeSocket = new ServerSocket(port);
+			ServerSocket welcomeSocket = new ServerSocket(port);
 
 			while (true)
 			{
 				System.out.println("Esperando peticiones en el puerto " + port + ".");
 				// Aceptamos la nueva petición y creamos el SocketManager para
 				// gestionar el Socket obtenido
-				SocketManager sm = new SocketManager(wellcomeSocket.accept());
+				SocketManager sm = new SocketManager(welcomeSocket.accept());
 
 				// Creamos un objeto ClientRequest para gestionar las peticiones
 				// del cliente

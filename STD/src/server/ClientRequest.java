@@ -7,9 +7,9 @@ import util.SocketManager;
 public class ClientRequest implements Runnable
 {
 
-	final static String CRLF = "\r\n";
-	String usuario;
-	SocketManager sockManager;
+	private final static String CRLF = "\r\n";
+	private String usuario;
+	private SocketManager sockManager;
 
 	public ClientRequest(SocketManager sm)
 	{
