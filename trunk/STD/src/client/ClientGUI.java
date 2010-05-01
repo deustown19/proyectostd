@@ -15,15 +15,19 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
@@ -50,10 +54,11 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private JPanel switchOnOffPanel;
 	private JButton offButton;
 	private JButton onButton;
-	private JLabel portLabel;
+	private JScrollPane commandListScrollPanel;
+	private JList commandList;
 	private JScrollPane historicTableScrollPanel;
 	private JToggleButton gpsButton;
-	private JPanel jPanel1;
+	private JPanel gpsPanel;
 	private JTable historicTable;
 	private JButton listSensorButton;
 	private JPanel historicPanel;
@@ -68,18 +73,20 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private JPanel bottomPanel;
 	private JPanel loginPanel;
 	private JPanel serverPanel;
-	private JLabel ipLabel;
+	private JLabel serverLabel;
 	private JLabel passLabel;
 	private JPasswordField passField;
 	
-	private String ip;
-	private String port;
+	private String serverIP;
+	private String serverPort;
+	private String serverName;
 
-	public ClientGUI(String ip, String port)
+	public ClientGUI(String ip, String port, String name)
 	{
 		super();
-		this.ip = ip;
-		this.port = port;
+		this.serverIP = ip;
+		this.serverPort = port;
+		this.serverName = name;
 		initGUI();
 	}
 
@@ -111,13 +118,21 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						serverPanel.setLayout(serverPanelLayout);
 						serverPanel.setBorder(BorderFactory.createTitledBorder("Servidor"));
 						{
-							ipLabel = new JLabel("IP: " + ip);
-							serverPanel.add(ipLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
+							serverLabel = new JLabel("//" + serverIP + ":" + serverPort + "/" + serverName);
+							serverPanel.add(serverLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 5, 0), 0, 0));
 						}
 						{
-							portLabel = new JLabel();
-							serverPanel.add(portLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-							portLabel.setText("Puerto: " + port);
+							commandListScrollPanel = new JScrollPane();
+							serverPanel.add(commandListScrollPanel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+							{
+								ListModel jList1Model = 
+									new DefaultListModel();
+								commandList = new JList();
+								commandListScrollPanel.setViewportView(commandList);
+								commandList.setModel(jList1Model);
+								commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+								commandList.setPreferredSize(new Dimension(200, 100));
+							}
 						}
 					}
 					{
@@ -152,14 +167,14 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						}
 					}
 					{
-						jPanel1 = new JPanel();
-						loginPanel.add(jPanel1);
+						gpsPanel = new JPanel();
+						loginPanel.add(gpsPanel);
 						GridBagLayout jPanel1Layout = new GridBagLayout();
-						jPanel1.setLayout(jPanel1Layout);
-						jPanel1.setBorder(BorderFactory.createTitledBorder("GPS"));
+						gpsPanel.setLayout(jPanel1Layout);
+						gpsPanel.setBorder(BorderFactory.createTitledBorder("GPS"));
 						{
 							gpsButton = new JToggleButton();
-							jPanel1.add(gpsButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+							gpsPanel.add(gpsButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 							gpsButton.setText("GPS");
 							gpsButton.setEnabled(false);
 							gpsButton.addActionListener(this);
@@ -181,7 +196,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						{
 							listSensorButton = new JButton();
 							listSensorPanel.add(listSensorButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 5, 0), 0, 0));
-							listSensorButton.setText("List Sensor");
+							listSensorButton.setText("Listar sensores");
 							listSensorButton.setEnabled(false);
 							listSensorButton.addActionListener(this);
 						}
@@ -293,6 +308,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	
 	public void update(String code, String message)
 	{
+		((DefaultListModel)commandList.getModel()).addElement(code + ": " + message);
 	}
 
 	private void login()
