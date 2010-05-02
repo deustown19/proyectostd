@@ -55,7 +55,8 @@ public class ClientRequest implements Runnable
 			{
 				entry = commandParser(sockManager.leer().toUpperCase());
 				sockManager.escribir(comandos.get(entry.getKey()).command(entry.getValue()));
-				
+				if ("SALIR".equals(entry.getKey()))
+					terminar = true;
 				/*switch (Integer.valueOf(comando[0]))
 				{
 					case 0:
@@ -115,9 +116,9 @@ public class ClientRequest implements Runnable
 						break;
 
 					case 2:
-						// TODO
+						// TO//DO
 					case 3:
-						// TODO
+						// TO//DO
 					default:
 						estado = 4;
 				}*/
@@ -136,7 +137,7 @@ public class ClientRequest implements Runnable
 	/**
 	 * @param s
 	 *            String comando recibido
-	 * @return String[] comando y parámetros separados
+	 * @return SimpleEntry<String, String[]> comando y parámetros separados
 	 */
 	private SimpleEntry<String, String[]> commandParser(String s)
 	{
