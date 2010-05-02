@@ -1,38 +1,62 @@
 package server;
 
 import java.io.IOException;
+import java.util.TreeMap;
+import java.util.AbstractMap.SimpleEntry;
 
+import server.command.Command;
+import server.command.GetFoto;
+import server.command.GetLoc;
+import server.command.GetValAct;
+import server.command.Historico;
+import server.command.ListSensor;
+import server.command.Off;
+import server.command.OffGPS;
+import server.command.On;
+import server.command.OnGPS;
+import server.command.Pass;
+import server.command.Salir;
+import server.command.User;
 import util.SocketManager;
 
 public class ClientRequest implements Runnable
 {
-
-	private final static String CRLF = "\r\n";
-	private String usuario;
 	private SocketManager sockManager;
+	private TreeMap<String, Command> comandos;
 
 	public ClientRequest(SocketManager sm)
 	{
 		this.sockManager = sm;
+		
+		comandos = new TreeMap<String, Command>();
+		comandos.put("USER", new User());
+		comandos.put("PASS", new Pass());
+		comandos.put("LISTSENSOR", new ListSensor());
+		comandos.put("HISTORICO", new Historico());
+		comandos.put("ON", new On());
+		comandos.put("OFF", new Off());
+		comandos.put("ONGPS", new OnGPS());
+		comandos.put("OFFGPS", new OffGPS());
+		comandos.put("GET_VALACT", new GetValAct());
+		comandos.put("GET_FOTO", new GetFoto());
+		comandos.put("GET_LOC", new GetLoc());
+		comandos.put("SALIR", new Salir());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Runnable#run()
-	 */
+	
 	@Override
 	public void run()
 	{
+		boolean terminar = false;
+		SimpleEntry<String, String[]> entry;
+		
 		try
 		{
-			String[] comando;
-			int estado = 0;
-			while (estado < 4)
+			while (!terminar)
 			{
-				comando = commandParser(sockManager.leer());
-
-				switch (estado)
+				entry = commandParser(sockManager.leer().toUpperCase());
+				sockManager.escribir(comandos.get(entry.getKey()).command(entry.getValue()));
+				
+				/*switch (Integer.valueOf(comando[0]))
 				{
 					case 0:
 						if (comando[0].toUpperCase().equals("USER"))
@@ -96,16 +120,16 @@ public class ClientRequest implements Runnable
 						// TODO
 					default:
 						estado = 4;
-				}
+				}*/
 			}
-			sockManager.escribir("208 OK Salir" + CRLF);
+			
 			System.out.println("Cliente fuera");
 			sockManager.cerrarSocket();
 			sockManager.cerrarStreams();
 		}
-		catch (IOException e)
+		catch (IOException ioe)
 		{
-			System.err.println(e);
+			System.err.println(ioe);
 		}
 	}
 
@@ -114,10 +138,12 @@ public class ClientRequest implements Runnable
 	 *            String comando recibido
 	 * @return String[] comando y parámetros separados
 	 */
-	private String[] commandParser(String s)
+	private SimpleEntry<String, String[]> commandParser(String s)
 	{
-		String[] comando = s.split(" ");
-		return comando;
+		String[] comando = s.trim().split(" ");
+		String[] params = new String[comando.length - 1];
+		for (int i=1; i<comando.length; i++)
+			params[i-1] = comando[i];
+		return new SimpleEntry<String, String[]>(comando[0], params);
 	}
-
 }
