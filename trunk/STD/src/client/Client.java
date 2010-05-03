@@ -1,13 +1,17 @@
 package client;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 
 public class Client
 {
 	private ClientGUI gui;
+	//TODO atributos para el socket
 	
 	public Client(String serverPort, String serverName)
 	{
@@ -19,7 +23,7 @@ public class Client
 	{
 		try
 		{
-			//TODO
+			//TODO 
 			return true;
 		}
 		catch (Exception e)
@@ -31,40 +35,32 @@ public class Client
 	
 	public boolean user(String user)
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public boolean pass(String pass)
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public Vector<Vector<String>> listSensor()
@@ -72,15 +68,14 @@ public class Client
 		try
 		{
 			//TODO
+			gui.update("");
+			return null;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return null;
 		}
-		
-		gui.update("");
-		return null;
 	}
 	
 	public Vector<Vector<String>> historico(String id)
@@ -88,91 +83,74 @@ public class Client
 		try
 		{
 			//TODO
+			gui.update("");
+			return null;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return null;
 		}
-		
-		gui.update("");
-		return null;
 	}
 	
 	public boolean on(String id)
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public boolean off(String id)
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public boolean onGPS()
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public boolean offGPS()
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
 	public Vector<String> getValAct(String id)
@@ -180,15 +158,14 @@ public class Client
 		try
 		{
 			//TODO
+			gui.update("");
+			return null;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return null;
 		}
-		
-		gui.update("");
-		return null;
 	}
 	
 	public Image getFoto()
@@ -196,15 +173,15 @@ public class Client
 		try
 		{
 			//TODO
+			BufferedImage image = ImageIO.read((InputStream) null); //TODO
+			gui.update("");
+			return image;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return null;
 		}
-		
-		gui.update("");
-		return null;
 	}
 	
 	public String getLoc()
@@ -212,37 +189,32 @@ public class Client
 		try
 		{
 			//TODO
+			gui.update("");
+			return null;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return null;
 		}
-		
-		gui.update("");
-		return null;
 	}
 	
-	public boolean cerrar()
+	public boolean close()
 	{
-		boolean isCorrect = false;
-		
 		try
 		{
 			//TODO
-			isCorrect = true;
+			gui.update("");
+			return true;
 		}
 		catch (Exception e)
 		{
 			gui.error("Error connecting to server");
 			return false;
 		}
-		
-		gui.update("");
-		return isCorrect;
 	}
 	
-	public void salir()
+	public void exit()
 	{
 		//TODO Cerrar socket
 		System.exit(0);

@@ -3,8 +3,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -56,6 +59,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private JPanel switchOnOffPanel;
 	private JButton offButton;
 	private JButton onButton;
+	private JButton locButton;
 	private JButton exitButton;
 	private JButton fotoButton;
 	private JPanel fotoButtonPanel;
@@ -96,6 +100,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private String serverIP;
 	private String serverPort;
 	private String serverName;
+	private Image canvasImage;
 
 	public ClientGUI(Client client, String serverPort, String serverName)
 	{
@@ -113,13 +118,12 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			setTitle("STD");
 			setSize(new Dimension(640, 580));
 			setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			//setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			this.addWindowListener(new WindowAdapter()
 			{
 				@Override
 				public void windowClosing(WindowEvent e)
 				{
-					client.salir();
+					client.exit();
 				}
 			});
 			setLocationRelativeTo(null);
@@ -346,9 +350,15 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							fotoButtonPanel.setLayout(fotoButtonPanelLayout);
 							{
 								fotoButton = new JButton();
-								fotoButtonPanel.add(fotoButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+								fotoButtonPanel.add(fotoButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 								fotoButton.setText("Tomar foto");
 								fotoButton.setEnabled(false);
+							}
+							{
+								locButton = new JButton();
+								fotoButtonPanel.add(locButton, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
+								locButton.setText("Recoger coordenadas");
+								locButton.setEnabled(false);
 							}
 						}
 					}
@@ -359,7 +369,18 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						canvasPanel.setLayout(jPanel1Layout2);
 						canvasPanel.setEnabled(false);
 						{
-							canvas = new Canvas();
+							canvas = new Canvas()
+							{
+								private static final long serialVersionUID = -1368486486482651348L;
+
+								@Override
+								public void paint(Graphics g)
+								{
+									super.paint(g);
+									if (canvasImage != null)
+										g.drawImage(canvasImage, 0, 0, this.getWidth(), this.getHeight(), this);
+								}
+							};
 							canvasPanel.add(canvas, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 							canvas.setPreferredSize(new Dimension(320, 160));
 						}
@@ -428,7 +449,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			serverIP = ipField.getText();
 			serverLabel.setText("//" + serverIP + ":" + serverPort + "/" + serverName);
 			disable(new JComponent[]{ipField, ipButton});
-			enable(new JComponent[]{userField, userButton});
+			enable(new JComponent[]{userField, userButton, closeButton});
 		}
 	}
 	
@@ -447,8 +468,8 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	{
 		if (client.user(user))
 		{
-			disable(new JComponent[]{});
-			enable(new JComponent[]{});
+			disable(new JComponent[]{userLabel, userButton});
+			enable(new JComponent[]{passLabel, loginButton});
 		}
 	}
 	
@@ -456,50 +477,130 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	{
 		if (client.pass(pass))
 		{
-			disable(new JComponent[]{});
-			enable(new JComponent[]{});
+			disable(new JComponent[]{passLabel, loginButton});
+			enable(new JComponent[]{listSensorButton, gpsButton, fotoButton, locButton});
 		}
 	}
 
 	private void listSensor()
 	{
+		Vector<Vector<String>> data = client.listSensor();
+		if (data != null)
+		{
+			DefaultTableModel dtm = (DefaultTableModel) sensorTable.getModel();
+			for (Vector<String> row: data)
+				dtm.addRow(row);
+			
+			disable(new JComponent[]{listSensorButton});
+			enable(new JComponent[]{sensorTable, historicTable, onButton, offButton, valActButton});
+		}
 	}
 	
 	private void historico(String id)
 	{
+		Vector<Vector<String>> data = client.historico(id);
+		if (data != null)
+		{
+			DefaultTableModel dtm = (DefaultTableModel) historicTable.getModel();
+			for (Vector<String> row: data)
+				dtm.addRow(row);
+		}
 	}
 	
-	private void on(String id)
+	private void on(int row)
 	{
+		if (client.on((String) sensorTable.getModel().getValueAt(row, 0)))
+		{
+			sensorTable.getModel().setValueAt("ON", row, 2);
+		}
 	}
 	
-	private void off(String id)
+	private void off(int row)
 	{
+		if (client.off((String) sensorTable.getModel().getValueAt(row, 0)))
+		{
+			sensorTable.getModel().setValueAt("OFF", row, 2);
+		}
 	}
 	
 	private void toggleGPS(boolean pressed)
 	{
-		gpsButton.setBackground(pressed? Color.GREEN: null);
+		if (pressed && client.onGPS())
+		{
+			gpsButton.setBackground(Color.GREEN);
+		}
+		else if (!pressed && client.offGPS())
+		{
+			gpsButton.setBackground(null);
+		}
 	}
 	
 	private void getValAct(String id)
 	{
+		Vector<String> data = client.getValAct(id);
 		
+		if (data != null)
+		{
+			((DefaultTableModel)historicTable.getModel()).addRow(data);
+		}
 	}
 	
 	private void getFoto()
 	{
+		canvasImage = client.getFoto();
 		
+		if (canvasImage != null)
+		{
+			canvas.repaint();
+		}
 	}
 	
 	private void getLoc()
 	{
+		String data = client.getLoc();
 		
+		if (data != null)
+		{
+			posLabel.setText(" ");
+			canvasImage = null;
+			canvas.repaint();
+		}
 	}
 	
-	private void salir()
+	private void close()
 	{
-		client.cerrar();
+		if (client.close())
+		{
+			serverLabel.setText(" ");
+			userField.setText("");
+			passField.setText("");
+			
+			DefaultTableModel dtm = (DefaultTableModel) sensorTable.getModel();
+			for (int i=0; i<dtm.getRowCount(); i++)
+				dtm.removeRow(i);
+			
+			dtm = (DefaultTableModel) historicTable.getModel();
+			for (int i=0; i<dtm.getRowCount(); i++)
+				dtm.removeRow(i);
+			
+			((DefaultListModel) commandList.getModel()).removeAllElements();
+			
+			canvasImage = null;
+			canvas.repaint();
+			
+			disable(new JComponent[]
+			{
+				userButton, userField, passField, loginButton,
+				listSensorButton, sensorTable, historicTable, onButton,
+				offButton, gpsButton, fotoButton, locButton, closeButton
+			});
+			enable(new JComponent[]{ipField, ipButton});
+		}
+	}
+	
+	private void exit()
+	{
+		client.exit();
 	}
 
 	@Override
@@ -514,13 +615,24 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 		else if (ae.getSource().equals(listSensorButton))
 			listSensor();
 		else if (ae.getSource().equals(onButton))
-			on((String) sensorTable.getModel().getValueAt(sensorTable.getSelectedRow(), 0));
+			on(sensorTable.getSelectedRow());
 		else if (ae.getSource().equals(offButton))
-			off((String) sensorTable.getModel().getValueAt(sensorTable.getSelectedRow(), 0));
+			off(sensorTable.getSelectedRow());
 		else if (ae.getSource().equals(gpsButton))
 			toggleGPS(gpsButton.getModel().isSelected());
+		else if (ae.getSource().equals(valActButton))
+			getValAct((String) sensorTable.getModel().getValueAt(sensorTable.getSelectedRow(), 0));
+		else if (ae.getSource().equals(fotoButton))
+		{
+			getFoto();
+			getLoc();
+		}
+		else if (ae.getSource().equals(locButton))
+			getLoc();
 		else if (ae.getSource().equals(closeButton))
-			salir();
+			close();
+		else if (ae.getSource().equals(exitButton))
+			exit();
 	}
 
 	@Override
