@@ -137,7 +137,7 @@ public class DataBaseManager
 		ResultSet rs = null;
 		Statement statement = getStatement();
 		rs = statement.executeQuery(select);
-		releaseStatement(statement);
+		//releaseStatement(statement);
 
 		return rs;
 	}
