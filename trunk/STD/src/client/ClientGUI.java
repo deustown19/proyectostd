@@ -141,7 +141,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						loginPanel.add(authPanel);
 						GridBagLayout authPanelLayout = new GridBagLayout();
 						authPanel.setLayout(authPanelLayout);
-						authPanel.setBorder(BorderFactory.createTitledBorder("Autenticaci�n"));
+						authPanel.setBorder(BorderFactory.createTitledBorder("Autenticacion"));
 						{
 							ipLabel = new JLabel();
 							authPanel.add(ipLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
@@ -174,7 +174,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							userButton.setEnabled(false);
 						}
 						{
-							passLabel = new JLabel("Contrase�a");
+							passLabel = new JLabel("Contrasenya");
 							authPanel.add(passLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 						}
 						{
@@ -291,7 +291,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						GridBagLayout jPanel2Layout = new GridBagLayout();
 						sensorPanel.add(historicPanel);
 						historicPanel.setLayout(jPanel2Layout);
-						historicPanel.setBorder(BorderFactory.createTitledBorder("Hist�rico"));
+						historicPanel.setBorder(BorderFactory.createTitledBorder("Historico"));
 						{
 							historicTableScrollPanel = new JScrollPane();
 							historicPanel.add(historicTableScrollPanel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
@@ -376,7 +376,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 					{
 						closeButton = new JButton();
 						bottomPanel.add(closeButton);
-						closeButton.setText("Cerrar sesi�n");
+						closeButton.setText("Cerrar sesion");
 						closeButton.setEnabled(false);
 						closeButton.addActionListener(this);
 					}
