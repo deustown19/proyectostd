@@ -3,9 +3,14 @@ package server.command;
 public class GetFoto extends Command
 {
 	@Override
-	public String command(String[] params)
+	public String command(CommandManager commandManager, String[] params)
 	{
-		// TODO Auto-generated method stub
-		return "";
+		String respuesta = "";
+		if (commandManager.getState()==2){
+		
+		}else{
+			respuesta = "450 ERR Comando no válido" + CRLF;
+		}
+		return respuesta;
 	}
 }
