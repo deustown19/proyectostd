@@ -141,7 +141,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						loginPanel.add(authPanel);
 						GridBagLayout authPanelLayout = new GridBagLayout();
 						authPanel.setLayout(authPanelLayout);
-						authPanel.setBorder(BorderFactory.createTitledBorder("Autenticación"));
+						authPanel.setBorder(BorderFactory.createTitledBorder("Autenticaciï¿½n"));
 						{
 							ipLabel = new JLabel();
 							authPanel.add(ipLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
@@ -174,7 +174,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							userButton.setEnabled(false);
 						}
 						{
-							passLabel = new JLabel("Contraseña");
+							passLabel = new JLabel("Contraseï¿½a");
 							authPanel.add(passLabel, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 						}
 						{
@@ -210,7 +210,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								commandListScrollPanel.setViewportView(commandList);
 								commandList.setModel(jList1Model);
 								commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-								commandListScrollPanel.setPreferredSize(new Dimension(290, 80));
+								commandListScrollPanel.setPreferredSize(new Dimension(280, 80));
 							}
 						}
 					}
@@ -291,7 +291,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						GridBagLayout jPanel2Layout = new GridBagLayout();
 						sensorPanel.add(historicPanel);
 						historicPanel.setLayout(jPanel2Layout);
-						historicPanel.setBorder(BorderFactory.createTitledBorder("Histórico"));
+						historicPanel.setBorder(BorderFactory.createTitledBorder("Histï¿½rico"));
 						{
 							historicTableScrollPanel = new JScrollPane();
 							historicPanel.add(historicTableScrollPanel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
@@ -376,7 +376,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 					{
 						closeButton = new JButton();
 						bottomPanel.add(closeButton);
-						closeButton.setText("Cerrar sesión");
+						closeButton.setText("Cerrar sesiï¿½n");
 						closeButton.setEnabled(false);
 						closeButton.addActionListener(this);
 					}
