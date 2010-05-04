@@ -441,7 +441,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	}
 	
 	private void connect()
-	{System.out.println("connect");
+	{
 		if (client.connect(ipField.getText()))
 		{
 			serverIP = ipField.getText();
@@ -466,8 +466,8 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	{
 		if (client.user(user))
 		{
-			disable(new JComponent[]{userLabel, userButton});
-			enable(new JComponent[]{passLabel, loginButton});
+			disable(new JComponent[]{userField, userButton});
+			enable(new JComponent[]{passField, loginButton});
 		}
 	}
 	
@@ -475,7 +475,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	{
 		if (client.pass(pass))
 		{
-			disable(new JComponent[]{passLabel, loginButton});
+			disable(new JComponent[]{passField, loginButton});
 			enable(new JComponent[]{listSensorButton, gpsButton, fotoButton});
 		}
 	}
@@ -603,8 +603,8 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	public void actionPerformed(ActionEvent ae)
 	{
 		if (ae.getSource().equals(ipButton))
-			{System.out.println("connect");connect();}
-		else if (ae.getSource().equals(loginButton))
+			connect();
+		else if (ae.getSource().equals(userButton))
 			user(userField.getText());
 		else if (ae.getSource().equals(loginButton))
 			pass(String.valueOf(passField.getPassword()));

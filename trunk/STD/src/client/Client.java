@@ -35,7 +35,7 @@ public class Client
 	}
 
 	public boolean connect(String ip)
-	{System.out.println("ip="+ip);
+	{
 		try
 		{
 			sm = new SocketManager(ip, Integer.valueOf(serverPort));
@@ -285,9 +285,12 @@ public class Client
 			gui.update(response);
 			if (response.charAt(0) != '4')
 			{
-				sm.cerrarStreams();
-				sm.cerrarSocket();
-				sm = null;
+				if (sm != null)
+				{
+					sm.cerrarStreams();
+					sm.cerrarSocket();
+					sm = null;
+				}
 				return true;
 			}
 		}
@@ -303,8 +306,11 @@ public class Client
 	{
 		try
 		{
-			sm.cerrarStreams();
-			sm.cerrarSocket();
+			if (sm != null)
+			{
+				sm.cerrarStreams();
+				sm.cerrarSocket();
+			}
 		}
 		catch (IOException e)
 		{
