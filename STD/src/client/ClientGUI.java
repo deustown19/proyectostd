@@ -159,6 +159,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							ipButton = new JButton();
 							authPanel.add(ipButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 							ipButton.setText("Conectar");
+							ipButton.addActionListener(this);
 						}
 						{
 							userLabel = new JLabel("Usuario");
@@ -175,6 +176,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							authPanel.add(userButton, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 							userButton.setText("Enviar");
 							userButton.setEnabled(false);
+							userButton.addActionListener(this);
 						}
 						{
 							passLabel = new JLabel("Contrasenya");
@@ -286,6 +288,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								switchOnOffPanel.add(valActButton);
 								valActButton.setText("Actualizar valor");
 								valActButton.setEnabled(false);
+								valActButton.addActionListener(this);
 							}
 						}
 					}
@@ -352,6 +355,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								fotoButtonPanel.add(fotoButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
 								fotoButton.setText("Tomar foto");
 								fotoButton.setEnabled(false);
+								fotoButton.addActionListener(this);
 							}
 						}
 					}
@@ -398,6 +402,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						exitButton = new JButton();
 						bottomPanel.add(exitButton);
 						exitButton.setText("Salir");
+						exitButton.addActionListener(this);
 					}
 				}
 				{
@@ -436,7 +441,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	}
 	
 	private void connect()
-	{
+	{System.out.println("connect");
 		if (client.connect(ipField.getText()))
 		{
 			serverIP = ipField.getText();
@@ -598,7 +603,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	public void actionPerformed(ActionEvent ae)
 	{
 		if (ae.getSource().equals(ipButton))
-			connect();
+			{System.out.println("connect");connect();}
 		else if (ae.getSource().equals(loginButton))
 			user(userField.getText());
 		else if (ae.getSource().equals(loginButton))
