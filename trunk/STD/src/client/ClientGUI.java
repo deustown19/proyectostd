@@ -507,12 +507,14 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private void historico(String id)
 	{
 		Vector<Vector<String>> data = client.historico(id);
+		
+		DefaultTableModel dtm = (DefaultTableModel) historicTable.getModel();
+		for (int i=0; i<dtm.getRowCount(); i++)
+			dtm.removeRow(i);
+		
 		if (data != null)
-		{
-			DefaultTableModel dtm = (DefaultTableModel) historicTable.getModel();
 			for (Vector<String> row: data)
 				dtm.addRow(row);
-		}
 	}
 	
 	private void on(int row)
@@ -678,7 +680,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent me)
 	{
-		System.out.println(me.getSource().toString());
+		historico((String) sensorTable.getModel().getValueAt(sensorTable.getSelectedRow(), 0));
 	}
 
 	@Override
