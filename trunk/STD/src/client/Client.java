@@ -3,14 +3,10 @@ package client;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.CharArrayWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStreamImpl;
 import javax.swing.UIManager;
 
 import util.SocketManager;
@@ -39,7 +35,7 @@ public class Client
 	}
 
 	public boolean connect(String ip)
-	{
+	{System.out.println("ip="+ip);
 		try
 		{
 			sm = new SocketManager(ip, Integer.valueOf(serverPort));
