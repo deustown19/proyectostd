@@ -244,7 +244,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 							listSensorPanel.add(sensorTableScrollPanel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
 							sensorTableScrollPanel.setPreferredSize(new Dimension(280, 100));
 							{
-								DefaultTableModel jTable1Model = new DefaultTableModel(new String[][] {{"01", "ejemplo", "OFF"}}, new String[] { "ID", "Nombre", "Estado" })
+								DefaultTableModel jTable1Model = new DefaultTableModel(new String[][] {}, new String[] { "ID", "Nombre", "Estado" })
 								{
 									private static final long serialVersionUID = -5355929655231575361L;
 									
