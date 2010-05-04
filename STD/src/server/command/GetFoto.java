@@ -1,5 +1,6 @@
 package server.command;
 
+import java.io.File;
 import java.io.FileInputStream;
 
 import server.ClientRequest;
@@ -17,11 +18,11 @@ public class GetFoto extends Command
 			{
 				String fileName = "img/imagen.jpg";
 				FileInputStream fis = null;
-				;
+				
 				try
 				{
 					fis = new FileInputStream(fileName);
-					cr.getSockManager().escribir("206 OK 20068 bytes transmitiendo." + CRLF);
+					cr.getSockManager().escribir("206 OK " + new File(fileName).length() + " bytes transmitiendo." + CRLF);
 					sendBytes(fis, cr.getSockManager());
 					cr.setState(3);
 				}
