@@ -11,7 +11,7 @@ public class Pass extends Command
 		String respuesta = "";
 		if (cr.getState()==1){
 			if (params.length == 0) {
-				return "403 ERR Falta la clave" + CRLF;
+				respuesta = "403 ERR Falta la clave" + CRLF;
 			}else{
 				String user = cr.getUser();
 				String realUser = "";
