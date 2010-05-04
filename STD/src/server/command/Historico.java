@@ -21,7 +21,7 @@ public class Historico extends Command
 						respuesta += rs.getString("fecha") + ";" + rs.getString("hora") + ";"+ rs.getString("latitud") + "-" + rs.getString("longitud") + ";" + rs.getInt("valor")+  CRLF;
 					}
 					rs.close();
-					respuesta += "212 OK Lista Finalizada.";
+					respuesta += "212 OK Lista Finalizada." + CRLF;
 				}catch(Exception e){
 					e.printStackTrace();
 				}

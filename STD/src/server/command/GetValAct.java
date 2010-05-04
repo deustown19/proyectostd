@@ -21,7 +21,7 @@ public class GetValAct extends Command
 						double latitud = (Math.random() * 180);
 						String sLongitud = dec.format(longitud)+"N";
 						String sLatitud = dec.format(latitud)+"N";	
-						int valor = (int) Math.random()*100;
+						int valor = (int) (Math.random()*100);
 						Calendar calendario = new GregorianCalendar();
 						String fecha =Integer.toString(calendario.get(Calendar.DAY_OF_MONTH)) + "/" + Integer.toString(calendario.get(Calendar.MONTH)) +"/"+Integer.toString(calendario.get(Calendar.YEAR));
 						String hora= Integer.toString(calendario.get(Calendar.HOUR)) + ":"+Integer.toString(calendario.get(Calendar.MINUTE))+":"+Integer.toString(calendario.get(Calendar.SECOND));
