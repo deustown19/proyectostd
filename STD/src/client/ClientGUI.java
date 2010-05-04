@@ -242,7 +242,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						{
 							sensorTableScrollPanel = new JScrollPane();
 							listSensorPanel.add(sensorTableScrollPanel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-							sensorTableScrollPanel.setPreferredSize(new Dimension(280, 100));
+							sensorTableScrollPanel.setPreferredSize(new Dimension(270, 100));
 							{
 								DefaultTableModel jTable1Model = new DefaultTableModel(new String[][] {}, new String[] { "ID", "Nombre", "Estado" })
 								{
@@ -301,7 +301,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						{
 							historicTableScrollPanel = new JScrollPane();
 							historicPanel.add(historicTableScrollPanel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-							historicTableScrollPanel.setPreferredSize(new Dimension(280, 145));
+							historicTableScrollPanel.setPreferredSize(new Dimension(270, 145));
 							{
 								DefaultTableModel jTable2Model = new DefaultTableModel(new String[][] {}, new String[] { "Fecha", "Hora", "Coordenadas", "Valor" })
 								{
