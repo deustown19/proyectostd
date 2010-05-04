@@ -30,4 +30,8 @@ public class Sensor {
 		this.descripcion = descripcion;
 		this.estado = estado;
 	}
+	
+	public boolean isOn(){
+		return (estado.equals("ON"));
+	}
 }

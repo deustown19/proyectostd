@@ -17,6 +17,7 @@ public class GetFoto extends Command
 				FileInputStream fis  = null;;
 				try {
 					fis = new FileInputStream(fileName);
+					cr.getSockManager().escribir("206 OK 20068 bytes transmitiendo.");
 					sendBytes(fis,cr.getSockManager());
 					cr.setState(3);
 			    }catch (Exception e) {
