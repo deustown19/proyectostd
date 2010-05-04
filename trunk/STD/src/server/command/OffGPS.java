@@ -9,7 +9,7 @@ public class OffGPS extends Command
 		String respuesta = "";
 		if (cr.getState()==2){
 			if(cr.isGps()){
-				cr.setGps(true);
+				cr.setGps(false);
 				respuesta = "206 OK GPS desactivado." + CRLF;
 			}
 			else
