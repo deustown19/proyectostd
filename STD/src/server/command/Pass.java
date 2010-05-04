@@ -18,9 +18,10 @@ public class Pass extends Command
 				String realPass = "";
 				try{
 					ResultSet rs = cr.getDbm().executeSelect("SELECT * FROM usuario WHERE nombre='"+user+"'");			
-					//rs.next();
-					realUser = rs.getString("nombre");
-					realPass = rs.getString("pass");
+					if(rs.next()){
+						realUser = rs.getString("nombre");
+						realPass = rs.getString("pass");
+					}
 					rs.close();
 				}catch (Exception e){
 					e.printStackTrace();
