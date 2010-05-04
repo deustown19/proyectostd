@@ -478,6 +478,13 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			disable(new JComponent[]{passField, loginButton});
 			enable(new JComponent[]{listSensorButton, gpsButton, fotoButton});
 		}
+		else
+		{
+			userField.setText("");
+			passField.setText("");
+			disable(new JComponent[]{passField, loginButton});
+			enable(new JComponent[]{userField, userButton});
+		}
 	}
 
 	private void listSensor()
