@@ -455,11 +455,13 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	{
 		((DefaultListModel)commandList.getModel()).addElement(message);
 		statusLabel.setText(" ");
+		statusPanel.setBackground(null);
 	}
 	
 	public void error(String message)
 	{
 		statusLabel.setText(message);
+		statusPanel.setBackground(Color.RED);
 	}
 
 	private void user(String user)
@@ -490,6 +492,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private void listSensor()
 	{
 		Vector<Vector<String>> data = client.listSensor();
+		
 		if (data != null)
 		{
 			DefaultTableModel dtm = (DefaultTableModel) sensorTable.getModel();
