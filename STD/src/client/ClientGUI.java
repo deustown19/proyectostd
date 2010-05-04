@@ -554,9 +554,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 		
 		if (data != null)
 		{
-			posLabel.setText(" ");
-			canvasImage = null;
-			canvas.repaint();
+			posLabel.setText(data);
 		}
 	}
 	
