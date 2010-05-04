@@ -59,7 +59,6 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 	private JPanel switchOnOffPanel;
 	private JButton offButton;
 	private JButton onButton;
-	private JButton locButton;
 	private JButton exitButton;
 	private JButton fotoButton;
 	private JPanel fotoButtonPanel;
@@ -354,12 +353,6 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								fotoButton.setText("Tomar foto");
 								fotoButton.setEnabled(false);
 							}
-							{
-								locButton = new JButton();
-								fotoButtonPanel.add(locButton, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(2, 8, 2, 8), 0, 0));
-								locButton.setText("Recoger coordenadas");
-								locButton.setEnabled(false);
-							}
 						}
 					}
 					{
@@ -478,7 +471,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 		if (client.pass(pass))
 		{
 			disable(new JComponent[]{passLabel, loginButton});
-			enable(new JComponent[]{listSensorButton, gpsButton, fotoButton, locButton});
+			enable(new JComponent[]{listSensorButton, gpsButton, fotoButton});
 		}
 	}
 
@@ -592,7 +585,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			{
 				userButton, userField, passField, loginButton,
 				listSensorButton, sensorTable, historicTable, onButton,
-				offButton, gpsButton, fotoButton, locButton, closeButton
+				offButton, gpsButton, fotoButton, closeButton
 			});
 			enable(new JComponent[]{ipField, ipButton});
 		}
@@ -627,8 +620,6 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			getFoto();
 			getLoc();
 		}
-		else if (ae.getSource().equals(locButton))
-			getLoc();
 		else if (ae.getSource().equals(closeButton))
 			close();
 		else if (ae.getSource().equals(exitButton))
