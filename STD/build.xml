@@ -7,13 +7,14 @@
 	<property name="server.port" value="5000"/> 
 	<property name="server.IP" value="127.0.0.1"/>
 	<property name="server.name" value="Server"/>
+    <property name="sqlite.jar" location="lib/sqlitejdbc-v056.jar"/>
 
 	<target name="help">
 		<echo>Usage: ant [build | consolaDebugueo | server | client]</echo>
 	</target>
 
 	<target name="consolaDebugueo" depends="build" description="Un debugueo cutre y tal">
-		<java classname="debugueo.consolaCliente" classpath="${classpath}" fork="true">  
+		<java classname="debugueo.ConsolaCliente" classpath="${classpath}" fork="true">  
         		<arg value="${server.IP}"/> 
 	 		<arg value="${server.port}"/>       
 		</java>
@@ -26,7 +27,7 @@
     </target>
     
 	<target name="server" depends="build" description="Runs Server program">
-		<java classname="server.CarServer" classpath="${classpath}" fork="true">
+		<java classname="server.CarServer" classpath="${classpath};${sqlite.jar}" fork="true">
 	 		 <arg value="${server.port}"/> 
         </java>
     </target>
