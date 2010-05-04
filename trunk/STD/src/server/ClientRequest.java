@@ -26,6 +26,10 @@ public class ClientRequest implements Runnable
 {
 	private SocketManager sockManager;
 	
+	public SocketManager getSockManager() {
+		return sockManager;
+	}
+
 	private  int state;
 	private  String user;
 	private  boolean gps;
