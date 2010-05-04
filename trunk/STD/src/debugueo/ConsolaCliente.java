@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public final class ConsolaCliente
 {
@@ -44,12 +47,14 @@ public final class ConsolaCliente
 			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 			String comando = "";
 			BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-
+			char[] cbuf = new char[400];
 			do
 			{
 				System.out.println("Prueba un comando: ");
 				comando = teclado.readLine() + "\r\n";
 				dos.writeBytes(comando);
+				//br.read(cbuf);
+				//System.out.println(cbuf);
 				System.out.println(br.readLine());
 			}
 			while (!"SALIR\r\n".equals(comando.toUpperCase()));
