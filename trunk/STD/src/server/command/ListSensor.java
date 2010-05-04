@@ -25,7 +25,7 @@ public class ListSensor extends Command
 				{
 					respuesta += sensores[i].getId() + ";" + sensores[i].getDescripcion() + ";"+ sensores[i].getEstado() + CRLF;
 				}
-				respuesta += "212 OK Lista Finalizada.";
+				respuesta += "212 OK Lista Finalizada." + CRLF;
 			}catch(Exception e){
 				e.printStackTrace();
 			}
