@@ -92,7 +92,23 @@ public class SocketManager
 	 */
 	public String leer() throws IOException
 	{
-		return (bufferLectura.readLine());
+		return bufferLectura.readLine();
+	}
+
+	public String leerBinario() throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		char[] buffer = new char[1024];
+		int chars;
+		
+		while ((chars = bufferLectura.read(buffer)) != -1)
+		{
+			sb.append(buffer);
+			if (chars < 1024)
+				break;
+		}
+		
+		return sb.toString();
 	}
 
 	public void escribir(String contenido) throws IOException
