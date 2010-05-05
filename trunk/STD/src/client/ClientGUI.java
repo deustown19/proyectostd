@@ -216,7 +216,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								commandList.setModel(jList1Model);
 								commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 								commandListScrollPanel.setAutoscrolls(true);
-								commandListScrollPanel.setPreferredSize(new Dimension(280, 80));
+								commandListScrollPanel.setPreferredSize(new Dimension(260, 60));
 							}
 						}
 					}
@@ -243,7 +243,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 						{
 							sensorTableScrollPanel = new JScrollPane();
 							listSensorPanel.add(sensorTableScrollPanel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 0, 5), 0, 0));
-							sensorTableScrollPanel.setPreferredSize(new Dimension(270, 100));
+							sensorTableScrollPanel.setPreferredSize(new Dimension(260, 60));
 							{
 								DefaultTableModel jTable1Model = new DefaultTableModel(new String[][] {}, new String[] { "ID", "Nombre", "Estado" })
 								{

@@ -1,7 +1,5 @@
 package gpsServer.command;
 
-import java.sql.ResultSet;
-
 import gpsServer.ClientRequest;
 
 public class Pass extends Command

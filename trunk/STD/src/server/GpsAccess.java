@@ -71,6 +71,30 @@ public class GpsAccess {
 		return coor;
 	}
 	
+	public boolean close()
+	{
+		try
+		{
+			sm.escribir("SALIR" + CRLF);
+			String response = sm.leer().trim();
+			if (response.charAt(0) != '4')
+			{
+				if (sm != null)
+				{
+					sm.cerrarStreams();
+					sm.cerrarSocket();
+					sm = null;
+				}
+				return true;
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	private static Vector<String> tokenize(String str, String delimiter)
 	{
 		Vector<String> vector = new Vector<String>();

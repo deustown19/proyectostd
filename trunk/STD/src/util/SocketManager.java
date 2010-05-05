@@ -12,7 +12,7 @@ import java.net.Socket;
  * Title: Practica 2 WebServer
  * </p>
  * <p>
- * Description: Hace transparente la funcionalidad básica de la clase Socket
+ * Description: Hace transparente la funcionalidad bï¿½sica de la clase Socket
  * </p>
  * <p>
  * Copyright: Copyright (c) 2005
@@ -65,7 +65,7 @@ public class SocketManager
 	}
 
 	/**
-	 * Inicialización de los bufferes de lectura y escritura del socket
+	 * Inicializaciï¿½n de los bufferes de lectura y escritura del socket
 	 * 
 	 * @throws IOException
 	 */
@@ -103,6 +103,7 @@ public class SocketManager
 		
 		while ((chars = bufferLectura.read(buffer)) != -1)
 		{
+			System.out.println(chars);
 			sb.append(buffer);
 			if (chars < 1024)
 				break;

@@ -18,18 +18,18 @@ public class CarServer
 					if (port < 1024 || port > 49152)
 					{
 						System.out.println("Número de puerto incorrecto. Debe estar entre 1024 y 49152. Elegido el puerto 3000 en su lugar.");
-						port = 3000;
+						port = 5000;
 					}
 				}
 				catch (NumberFormatException e)
 				{
-					System.out.println("Formato de puerto incorrecto. Elegido el puerto 3000 en su lugar.");
-					port = 3000;
+					System.out.println("Formato de puerto incorrecto. Elegido el puerto 5000 en su lugar.");
+					port = 5000;
 				}
 			}
 			else
 			{
-				port = 3000;
+				port = 5000;
 			}
 
 			ServerSocket welcomeSocket = new ServerSocket(port);

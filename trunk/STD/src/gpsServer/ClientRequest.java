@@ -7,7 +7,6 @@ import gpsServer.command.Salir;
 import gpsServer.command.User;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.TreeMap;
 import java.util.AbstractMap.SimpleEntry;
 

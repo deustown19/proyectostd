@@ -22,8 +22,13 @@ public class GetFoto extends Command
 				try
 				{
 					fis = new FileInputStream(fileName);
+					//File file = new File(fileName);
+					//BufferedImage bi = ImageIO.read(file);
 					cr.getSockManager().escribir("206 OK " + new File(fileName).length() + " bytes transmitiendo." + CRLF);
 					sendBytes(fis, cr.getSockManager());
+					fis.close();
+					cr.getSockManager().escribir(CRLF + "fin"+ CRLF);
+					//ImageIO.write(bi, "jpg", cr.getSockManager().getDOS());
 					cr.setState(3);
 				}
 				catch (Exception e)

@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.text.DecimalFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public final class ConsolaCliente
 {
