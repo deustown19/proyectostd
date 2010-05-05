@@ -31,6 +31,11 @@
 	 		 <arg value="${server.port}"/> 
         </java>
     </target>
+	
+	<target name="gpsServer" depends="build" description="Runs Server program">
+			<java classname="gpsServer.GpsServer" classpath="${classpath};${sqlite.jar}" fork="true">
+	        </java>
+	    </target>
 
 	<target name="client" description="Runs Server program">
 		<java classname="client.Client" classpath="${classpath}" fork="true">
