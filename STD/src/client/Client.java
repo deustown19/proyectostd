@@ -246,7 +246,10 @@ public class Client
 			gui.update(response);
 			if (response.charAt(0) != '4')
 			{
-				BufferedImage image = ImageIO.read(new ByteArrayInputStream(sm.leer().getBytes()));
+				String str = sm.leerBinario(); System.out.println(str.length());
+				byte[] bytes = str.getBytes(); System.out.println(bytes.length);
+				ByteArrayInputStream bais = new ByteArrayInputStream(bytes); System.out.println(bais);
+				BufferedImage image = ImageIO.read(bais);
 				return image;
 			}
 		}

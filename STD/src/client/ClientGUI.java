@@ -215,6 +215,7 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 								commandListScrollPanel.setViewportView(commandList);
 								commandList.setModel(jList1Model);
 								commandList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+								commandListScrollPanel.setAutoscrolls(true);
 								commandListScrollPanel.setPreferredSize(new Dimension(280, 80));
 							}
 						}
@@ -595,6 +596,9 @@ public class ClientGUI extends JFrame implements ActionListener, KeyListener, Mo
 			
 			canvasImage = null;
 			canvas.repaint();
+			
+			gpsButton.getModel().setSelected(false);
+			gpsButton.setBackground(null);
 			
 			disable(new JComponent[]
 			{
