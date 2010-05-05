@@ -12,7 +12,7 @@ public class GetCoor extends Command {
 		if (cr.getState()==2){
 			if (params.length == 0) {
 				respuesta =  "418 ERR Falta parámetro cell_id." + CRLF;
-			}else if(params[0]=="3053"){
+			}else if(params[0].equals("3053")){
 				DecimalFormat dec = new DecimalFormat("###.######");
 				double longitud = (Math.random() * 180);
 				double latitud = (Math.random() * 180);

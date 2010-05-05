@@ -23,7 +23,7 @@ public class GpsServer
 				}
 				catch (NumberFormatException e)
 				{
-					System.out.println("Formato de puerto incorrecto. Elegido el puerto 3000 en su lugar.");
+					System.out.println("Formato de puerto incorrecto. Elegido el puerto 4000 en su lugar.");
 					port = 4000;
 				}
 			}
