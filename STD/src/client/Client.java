@@ -246,10 +246,24 @@ public class Client
 			gui.update(response);
 			if (response.charAt(0) != '4')
 			{
-				String str = sm.leerBinario(); System.out.println(str.length());
+				/*String str = sm.leerBinario(); System.out.println(str.length());
 				byte[] bytes = str.getBytes(); System.out.println(bytes.length);
 				ByteArrayInputStream bais = new ByteArrayInputStream(bytes); System.out.println(bais);
+				BufferedImage image = ImageIO.read(bais);*/
+				String imageStr = "";
+				String auxString;
+				
+				auxString = sm.leer();
+				while (!("fin".equals(auxString)))
+				{
+					imageStr += auxString;
+					auxString = sm.leer();
+				}
+				System.out.println(auxString);
+				byte[] bytes = imageStr.getBytes(); System.out.println(bytes.length);
+				ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 				BufferedImage image = ImageIO.read(bais);
+				
 				return image;
 			}
 		}
@@ -324,10 +338,36 @@ public class Client
 	
 	public static void main(String[] args)
 	{
+		int port;
 		try
 		{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			new Client(args[0], args[1]);
+			{// Set the port number.
+				
+				if (args.length > 0)
+				{// Comprobación de que el puerto es un número válido. 3000 por defecto.
+					try
+					{
+						port = Integer.parseInt(args[0]);
+						if (port < 1024 || port > 49152)
+						{
+							System.out.println("Número de puerto incorrecto. Debe estar entre 1024 y 49152. Elegido el puerto 3000 en su lugar.");
+							port = 5000;
+						}
+					}
+					catch (NumberFormatException e)
+					{
+						System.out.println("Formato de puerto incorrecto. Elegido el puerto 5000 en su lugar.");
+						port = 5000;
+					}
+				}
+				else
+				{
+					port = 5000;
+				}
+			}
+			
+			new Client(String.valueOf(port), "CarServer");
 		}
 		catch (Exception e)
 		{

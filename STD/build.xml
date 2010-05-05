@@ -37,7 +37,7 @@
 	        </java>
 	    </target>
 
-	<target name="client" description="Runs Server program">
+	<target name="client" depends="build" description="Runs Server program">
 		<java classname="client.Client" classpath="${classpath}" fork="true">
 	 		<arg value="${server.port}"/> 
 			<arg value="${server.name}"/> 
